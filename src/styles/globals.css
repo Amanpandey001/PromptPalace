@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  animation: bg 3s ease-in-out infinite alternate;
+}
+nav{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: rgb(129, 169, 230);
+}
+.ppalace,.logo{
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #0ff, 0 0 80px #0ff, 0 0 90px #0ff, 0 0 100px #0ff, 0 0 150px #0ff;
+}
+@keyframes bg {
+  0% {
+    background-color: #f1c973;
+  }
+  20%{
+    background-color: #88f17e;
+  }
+  40% {
+    background-color: #77d4d0;
+  }
+  60% {
+    background-color: #80b2e4;
+  }
+  80% {
+    background-color: #d687dd;
+  }
+  100% {
+    background-color: #df6f90;
+  }
+}

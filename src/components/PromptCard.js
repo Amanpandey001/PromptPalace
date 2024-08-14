@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     const { data: session } = useSession();
     const pathName = usePathname();
@@ -20,11 +21,14 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
                     <div className=" flex-1 flex justify-start items-center gap-3 cursor-pointer">
                         <Image src={post.creator.image} alt="user-profile" width={35} height={35} className="rounded-full object-contain" />
                         <div className="flex flex-col leading-tight">
-                            <h1 className="font-sans font-semibold text-xl text-gray-900">{post.creator.username}</h1>
+                            <h1 className="font-sans font-semibold text-xl hover:underline hover:text-blue-900 text-gray-900">
+                                <Link href={`/profile/${post.creator._id}`}>{post.creator.username}</Link>
+
+                            </h1>
                             <p className="text-xs text-gray-500">{post.creator.email}</p>
                         </div>
                     </div>
-                    <div onClick={handleCopy} className="cursor-pointer">
+                    <div onClick={handleCopy} className="cursor-pointer">   
                         <Image
                             src={copied === post.prompt ? "/tick.svg" : "/copy.svg"}
                             width={20}

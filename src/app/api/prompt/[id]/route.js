@@ -15,7 +15,7 @@ export const GET = async (req, { params }) => {
         return new Response(JSON.stringify(error),{message: "Failed to fetch all prompts"}, { status: 500 });
     }
 }
-
+ 
 //PATCH (to update)
 export const PATCH = async (req, { params }) => {
     const { prompt, tag } = await req.json();
@@ -39,7 +39,7 @@ export const PATCH = async (req, { params }) => {
 export const DELETE = async (req, { params }) => {
     try {
         await connectDB();
-        await Prompt.findByIdAndRemove(params.id);
+        await Prompt.findByIdAndDelete(params.id);
         return new Response(JSON.stringify({ message: "Prompt deleted successfully" }), { status: 200 });
     } catch (error) {
         return new Response(JSON.stringify(error),{message: "Failed to delete prompt"}, { status: 500 });

@@ -25,20 +25,35 @@ const handler = NextAuth({
         async signIn({ profile }) {
             try {
                 await connectDB();
-                const userExists = await User.findOne({ email: profile.email });
-                if (!userExists) {
+        
+                const email = profile.email;
+                const existingUser = await User.findOne({ email });
+        
+                if (!existingUser) {
+                    // Generate a unique username
+                    const baseUsername = profile.name.replace(" ", "").toLowerCase();
+                    let username = baseUsername;
+                    let count = 1;
+        
+                    // Ensure the username is unique
+                    while (await User.findOne({ username })) {
+                        username = `${baseUsername}${count}`;
+                        count++;
+                    }
+        
                     await User.create({
-                        email: profile.email,
-                        username: profile.name.replace(" ", "").toLowerCase(),
+                        email,
+                        username,
                         image: profile.picture,
                     });
                 }
-                return true;  // Return true to indicate the sign-in was successful
+        
+                return true;
             } catch (error) {
                 console.error("Error in sign-in callback:", error.message);
-                return false; // Return false to indicate the sign-in failed
+                return false;
             }
-        },
+        }        
     },
 })
 

@@ -14,6 +14,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
         navigator.clipboard.writeText(post.prompt);
         setTimeout(() => setCopied(""), 3000);
     }
+    
     return (
         <div className="border-b-2 border-gray-500 bg-zinc-200 w-full p-5 sm:w-[50%]">
             <div className="flex flex-col justify-between items-start hover:bg-zinc-300 p-3 gap-5">
